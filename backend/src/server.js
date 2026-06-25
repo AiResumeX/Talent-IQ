@@ -1,7 +1,10 @@
 import express from "express"
 import path from "path";
+import dns from "dns";
 
 import {ENV} from "./lib/env.js";
+import { connectDB } from "./lib/db.js";
+dns.setDefaultResultOrder('ipv4first');
 
 const app=express();
 const __dirname = path.resolve();
@@ -21,7 +24,7 @@ if (ENV.NODE_ENV === "production") {
 
 const startServer = async () => {
   try {
-    // await connectDB();
+     await connectDB();
     app.listen(ENV.PORT, () => console.log("Server is running on port:", ENV.PORT));
   } catch (error) {
     console.error("💥 Error starting the server", error);
