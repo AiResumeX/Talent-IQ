@@ -1,26 +1,22 @@
 import { useState } from 'react'
-import './App.css'
-import {
-  SignedIn,
-  SignedOut,
-  SignInButton,
-  SignOutButton,
-  UserButton,
-} from "@clerk/clerk-react";
+
+
+import { Routes } from 'react-router';
+import { Toaster } from "react-hot-toast";
+import HomePage from "./pages/HomePage";
+
 
 function App() {
   return (
     <>
-      <h1>welcome</h1>
-      <SignedOut>
-      <SignInButton mode ="modal" />
-      </SignedOut>
-      <SignedIn>
-        <SignOutButton/>
-      </SignedIn>
-      <UserButton/>
+    <Routes>
+         <Route path="/" element={!isSignedIn ? <HomePage /> : <Navigate to={"/dashboard"} />} />
+
+    </Routes>
+         <Toaster toastOptions={{ duration: 3000 }} />
     </>
   )
 }
+
 
 export default App
