@@ -7,7 +7,11 @@ import { ChevronRightIcon, Code2Icon } from "lucide-react";
 import { getDifficultyBadgeClass } from "../lib/utils";
 
 function ProblemsPage() {
-  const problems = Obj.values(PROBLEMS);
+  const problems = Object.values(PROBLEMS);
+
+  const easyProblemsCount = problems.filter((p) => p.difficulty === "easy").length;
+  const mediumProblemsCount = problems.filter((p) => p.difficulty === "medium").length;
+  const hardProblemsCount = problems.filter((p) => p.difficulty === "hard").length;
 
   return (
     <div className="min-h-screen bg-base-200">
