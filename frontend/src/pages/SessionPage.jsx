@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 function SessionPage() {
-  return (
-    <div>SessionPage</div>
-  )
+  return <div>SessionPage</div>;
 }
 
-export default SessionPage
+export default SessionPage;
