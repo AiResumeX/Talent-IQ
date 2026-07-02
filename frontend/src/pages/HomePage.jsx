@@ -30,7 +30,9 @@ function HomePage() {
               <span className="font-black text-xl bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent font-mono tracking-wider">
                 Talent IQ
               </span>
-              <span className="text-xs text-base-content/60 font-medium -mt-1">Code Together</span>
+              <span className="text-xs text-base-content/60 font-medium -mt-1">
+                Code Together
+              </span>
             </div>
           </Link>
 
@@ -63,8 +65,9 @@ function HomePage() {
             </h1>
 
             <p className="text-xl text-base-content/70 leading-relaxed max-w-xl">
-              The ultimate platform for collaborative coding interviews and pair programming.
-              Connect face-to-face, code in real-time, and ace your technical interviews.
+              The ultimate platform for collaborative coding interviews and pair
+              programming. Connect face-to-face, code in real-time, and ace your
+              technical interviews.
             </p>
 
             {/* FEATURE PILLS */}
@@ -128,10 +131,12 @@ function HomePage() {
       <div className="max-w-7xl mx-auto px-4 py-20">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold mb-4">
-            Everything You Need to <span className="text-primary font-mono">Succeed</span>
+            Everything You Need to{" "}
+            <span className="text-primary font-mono">Succeed</span>
           </h2>
           <p className="text-lg text-base-content/70 max-w-2xl mx-auto">
-            Powerful features designed to make your coding interviews seamless and productive
+            Powerful features designed to make your coding interviews seamless
+            and productive
           </p>
         </div>
 
@@ -145,7 +150,8 @@ function HomePage() {
               </div>
               <h3 className="card-title">HD Video Call</h3>
               <p className="text-base-content/70">
-                Crystal clear video and audio for seamless communication during interviews
+                Crystal clear video and audio for seamless communication during
+                interviews
               </p>
             </div>
           </div>
@@ -158,7 +164,8 @@ function HomePage() {
               </div>
               <h3 className="card-title">Live Code Editor</h3>
               <p className="text-base-content/70">
-                Collaborate in real-time with syntax highlighting and multiple language support
+                Collaborate in real-time with syntax highlighting and multiple
+                language support
               </p>
             </div>
           </div>
@@ -171,7 +178,8 @@ function HomePage() {
               </div>
               <h3 className="card-title">Easy Collaboration</h3>
               <p className="text-base-content/70">
-                Share your screen, discuss solutions, and learn from each other in real-time
+                Share your screen, discuss solutions, and learn from each other
+                in real-time
               </p>
             </div>
           </div>

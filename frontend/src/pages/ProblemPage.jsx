@@ -1,9 +1,11 @@
-import React from 'react'
+import React from "react";
 
 function ProblemPage() {
   return (
-    <div>ProblemPage</div>
-  )
+    <div className="min-h-screen bg-base-200">
+      <Navbar />
+    </div>
+  );
 }
 
-export default ProblemPage
+export default ProblemPage;
