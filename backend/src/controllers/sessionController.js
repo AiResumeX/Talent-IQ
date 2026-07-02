@@ -148,7 +148,6 @@ export async function endSession(req, res) {
         .json({ message: "Only the host can end the session" });
     }
 
-    d;
     if (session.status === "completed") {
       return res.status(400).json({ message: "Session is already completed" });
     }
