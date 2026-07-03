@@ -12,7 +12,6 @@ import chatRoutes from "./routes/chatRoutes.js";
 import sessionRoutes from "./routes/sessionRoute.js";
 import executeRoutes from "./routes/executeRoute.js";
 
-
 dns.setDefaultResultOrder("ipv4first");
 
 const app = express();
@@ -21,7 +20,12 @@ const __dirname = path.resolve();
 // middleware
 app.use(express.json());
 
-app.use(cors({ origin: [ENV.CLIENT_URL, "http://localhost:5173"].filter(Boolean), credentials: true }));
+app.use(
+  cors({
+    origin: [ENV.CLIENT_URL, "http://localhost:5173"].filter(Boolean),
+    credentials: true,
+  }),
+);
 app.use(clerkMiddleware());
 
 app.use("/api/inngest", serve({ client: inngest, functions }));
