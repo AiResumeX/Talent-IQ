@@ -2,16 +2,22 @@ import React from "react";
 import { Link } from "react-router";
 import Navbar from "../components/Navbar";
 
-import { PROBLEMS } from "../data/problem.js";
+import { PROBLEMS } from "../data/problems.js";
 import { ChevronRightIcon, Code2Icon } from "lucide-react";
 import { getDifficultyBadgeClass } from "../lib/utils";
 
 function ProblemsPage() {
   const problems = Object.values(PROBLEMS);
 
-  const easyProblemsCount = problems.filter((p) => p.difficulty === "easy").length;
-  const mediumProblemsCount = problems.filter((p) => p.difficulty === "medium").length;
-  const hardProblemsCount = problems.filter((p) => p.difficulty === "hard").length;
+  const easyProblemsCount = problems.filter(
+    (p) => p.difficulty === "Easy",
+  ).length;
+  const mediumProblemsCount = problems.filter(
+    (p) => p.difficulty === "Medium",
+  ).length;
+  const hardProblemsCount = problems.filter(
+    (p) => p.difficulty === "Hard",
+  ).length;
 
   return (
     <div className="min-h-screen bg-base-200">
