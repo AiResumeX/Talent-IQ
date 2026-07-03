@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router";
 import Navbar from "../components/Navbar";
 
-import { PROBLEMS } from "../data/problem.js";
+import { PROBLEMS } from "../data/problems.js";
 import { ChevronRightIcon, Code2Icon } from "lucide-react";
 import { getDifficultyBadgeClass } from "../lib/utils";
 
