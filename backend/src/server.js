@@ -10,6 +10,8 @@ import { connectDB } from "./lib/db.js";
 import { inngest, functions } from "./lib/inngest.js";
 import chatRoutes from "./routes/chatRoutes.js";
 import sessionRoutes from "./routes/sessionRoute.js";
+import executeRoutes from "./routes/executeRoute.js";
+
 
 dns.setDefaultResultOrder("ipv4first");
 
@@ -19,12 +21,13 @@ const __dirname = path.resolve();
 // middleware
 app.use(express.json());
 
-app.use(cors({ origin: ENV.CLIENT_URL, credentials: true }));
+app.use(cors({ origin: [ENV.CLIENT_URL, "http://localhost:5173"].filter(Boolean), credentials: true }));
 app.use(clerkMiddleware());
 
 app.use("/api/inngest", serve({ client: inngest, functions }));
 app.use("/api/chat", chatRoutes);
 app.use("/api/sessions", sessionRoutes);
+app.use("/api/execute", executeRoutes);
 
 app.get("/health", (req, res) => {
   res.status(200).json({ msg: "api is running" });
