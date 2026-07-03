@@ -15,7 +15,8 @@ export async function executeCode(language, code) {
     const details = response.data;
 
     const buildError = details.build_stderr || details.build_stdout;
-    const buildFailed = details.build_result === "failure" || details.build_result === "error";
+    const buildFailed =
+      details.build_result === "failure" || details.build_result === "error";
 
     if (buildFailed && buildError) {
       return {
@@ -27,7 +28,8 @@ export async function executeCode(language, code) {
       };
     }
 
-    const runFailed = details.result === "failure" || details.result === "error";
+    const runFailed =
+      details.result === "failure" || details.result === "error";
     const runError = details.stderr;
 
     if (runFailed && runError) {
@@ -49,8 +51,9 @@ export async function executeCode(language, code) {
   } catch (error) {
     return {
       success: false,
-      error: error.response?.data?.message || `Failed to execute code: ${error.message}`,
+      error:
+        error.response?.data?.message ||
+        `Failed to execute code: ${error.message}`,
     };
   }
 }
-

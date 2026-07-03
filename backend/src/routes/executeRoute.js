@@ -17,7 +17,9 @@ router.post("/", protectRoute, async (req, res) => {
 
     const paizaLanguage = LANGUAGE_MAPPING[language];
     if (!paizaLanguage) {
-      return res.status(400).json({ message: `Unsupported language: ${language}` });
+      return res
+        .status(400)
+        .json({ message: `Unsupported language: ${language}` });
     }
 
     const params = new URLSearchParams({
@@ -36,12 +38,16 @@ router.post("/", protectRoute, async (req, res) => {
     });
 
     if (!response.ok) {
-      return res.status(response.status).json({ message: `Paiza API error: status ${response.status}` });
+      return res
+        .status(response.status)
+        .json({ message: `Paiza API error: status ${response.status}` });
     }
 
     const createData = await response.json();
     if (!createData.id) {
-      return res.status(500).json({ message: "Failed to create runner session" });
+      return res
+        .status(500)
+        .json({ message: "Failed to create runner session" });
     }
 
     const sessionId = createData.id;
@@ -54,7 +60,7 @@ router.post("/", protectRoute, async (req, res) => {
       await new Promise((resolve) => setTimeout(resolve, pollInterval));
 
       const detailsResponse = await fetch(
-        `${PAIZA_API}/runners/get_details?id=${sessionId}&api_key=guest`
+        `${PAIZA_API}/runners/get_details?id=${sessionId}&api_key=guest`,
       );
 
       if (!detailsResponse.ok) {

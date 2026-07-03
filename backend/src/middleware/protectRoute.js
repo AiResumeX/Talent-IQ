@@ -20,7 +20,9 @@ export const protectRoute = [
         try {
           const clerkUser = await clerkClient.users.getUser(clerkId);
           const email = clerkUser.emailAddresses[0]?.emailAddress;
-          const name = `${clerkUser.firstName || ""} ${clerkUser.lastName || ""}`.trim() || "User";
+          const name =
+            `${clerkUser.firstName || ""} ${clerkUser.lastName || ""}`.trim() ||
+            "User";
           const profileImage = clerkUser.imageUrl;
 
           user = await User.create({
@@ -40,7 +42,10 @@ export const protectRoute = [
               image: profileImage,
             });
           } catch (streamErr) {
-            console.error("❌ Failed to sync user to Stream during auto-sync:", streamErr);
+            console.error(
+              "❌ Failed to sync user to Stream during auto-sync:",
+              streamErr,
+            );
           }
         } catch (clerkErr) {
           console.error("❌ Failed to auto-sync user from Clerk:", clerkErr);
