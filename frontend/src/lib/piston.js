@@ -1,85 +1,56 @@
-const PISTON_API = "https://emkc.org/api/v2/piston";
-
-const LANGUAGE_VERSIONS = {
-  javascript: { language: "javascript", version: "18.15.0" },
-  python: { language: "python", version: "3.10.0" },
-  java: { language: "java", version: "15.0.2" },
-  cpp: { language: "c++", version: "10.2.0" },
-};
+import axiosInstance from "./axios.js";
 
 /**
  * @param {string} language - programming language
- * @param {string} code - source code to executed
+ * @param {string} code - source code to execute
  * @returns {Promise<{success:boolean, output?:string, error?: string}>}
  */
-
 export async function executeCode(language, code) {
   try {
-    const languageConfig = LANGUAGE_VERSIONS[language];
-
-    if (!languageConfig) {
-      return {
-        success: false,
-        error: `Unsupported language: ${language}`,
-      };
-    }
-
-    const response = await fetch(`${PISTON_API}/execute`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        language: languageConfig.language,
-        version: languageConfig.version,
-        files: [
-          {
-            name: `main.${getFileExtension(language)}`,
-            content: code,
-          },
-        ],
-      }),
+    const response = await axiosInstance.post("/execute", {
+      language,
+      code,
     });
 
-    if (!response.ok) {
+    const details = response.data;
+
+    const buildError = details.build_stderr || details.build_stdout;
+    const buildFailed = details.build_result === "failure" || details.build_result === "error";
+
+    if (buildFailed && buildError) {
       return {
         success: false,
-        error: `HTTP error! status: ${response.status}`,
+        output: details.build_stdout || "",
+        error: details.build_stderr || "Build failed",
+        time: details.build_time,
+        memory: details.build_memory,
       };
     }
 
-    const data = await response.json();
+    const runFailed = details.result === "failure" || details.result === "error";
+    const runError = details.stderr;
 
-    const output = data.run.output || "";
-    const stderr = data.run.stderr || "";
-
-    if (stderr) {
+    if (runFailed && runError) {
       return {
         success: false,
-        output: output,
-        error: stderr,
+        output: details.stdout || "",
+        error: details.stderr,
+        time: details.time,
+        memory: details.memory,
       };
     }
 
     return {
       success: true,
-      output: output || "No output",
+      output: details.stdout || "No output",
+      time: details.time,
+      memory: details.memory,
     };
   } catch (error) {
     return {
       success: false,
-      error: `Failed to execute code: ${error.message}`,
+      error: error.response?.data?.message || `Failed to execute code: ${error.message}`,
     };
   }
 }
 
-function getFileExtension(language) {
-  const extensions = {
-    javascript: "js",
-    python: "py",
-    java: "java",
-    cpp: "cpp",
-  };
-
-  return extensions[language] || "txt";
-}
