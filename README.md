@@ -19,7 +19,6 @@
 - ⚡ Data Fetching & Caching via TanStack Query
 - 🤖 CodeRabbit for PR Analysis & Code Optimization
 - 🧑‍💻 Git & GitHub Workflow (branches, PRs, merges)
-- 🚀 Deployment on Sevalla (free-tier friendly)
 
 ---
 
